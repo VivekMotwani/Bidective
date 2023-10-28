@@ -1,0 +1,93 @@
+{% extends "auctions/layout.html" %}
+{% block title %}
+    Watchlist
+{% endblock %}
+
+{% block styles %}
+<style>
+    /* Custom styles for the Watchlist page */
+    .listing-container {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+        overflow: hidden;
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .listing-image {
+        float: left;
+        margin-right: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .listing-details {
+        overflow: hidden;
+    }
+
+    .listing-title {
+        font-size: 18px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .listing-title:hover {
+        color: #007bff;
+    }
+
+    .listing-category,
+    .listing-price {
+        margin-top: 5px;
+        font-weight: bold;
+    }
+
+    .delete-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .delete-button button {
+        background-color: #ff0000;
+        color: #fff;
+        padding: 5px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>Watchlist</h2>
+        <div class="row">
+            {% for listing in listings %}
+                <div class="col-md-4">
+                    <div class="listing-container">
+                        <img src="{{ listing.image }}" alt="List Image" class="listing-image" style="height: 200px; width: 200px;">
+                        <div class="listing-details">
+                            <a href="/view/{{ listing.pk }}" class="listing-title">{{ listing.title }}</a>
+                            <p class="listing-category">Category: {{ listing.category }}</p>
+                            <p class="listing-price">Current Bid: ${{ listing.current_bid }}</p>
+                        </div>
+                        <div class="delete-button">
+                            <p></p>
+                            <form action="/deletewatchlist/{{ listing.pk }}" method="post">
+                                {% csrf_token %}
+                                <button class="btn btn-danger" type="submit" name="Delete">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if not listings %}
+            <p>Your watchlist is empty.</p>
+        {% endif %}
+    </div>
+{% endblock %}

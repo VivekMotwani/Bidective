@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categories</title>
+    <style>
+      /* Global styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Header styles */
+      header {
+        background-color: #007bff;
+        padding: 10px 0;
+        text-align: center;
+      }
+
+      h1 {
+        color: #fff;
+      }
+
+      /* Navigation menu styles */
+      nav {
+            text-align: center;
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+      .menu-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .menu-list li {
+        display: inline;
+        margin: 0 20px;
+      }
+
+      .menu-link {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+
+      .menu-link:hover {
+        color: #ff5722; /* Change the color on hover */
+      }
+
+      /* Category list styles */
+      .category-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .category-list li {
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .category-box {
+        background-color: #f7f7f7;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .category-link {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+
+      .category-link:hover {
+        color: #ff5722; /* Change the color on hover */
+      }
+
+      /* Horizontal rule styles */
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Categories</h1>
+    </header>
+    <nav>
+      <ul class="menu-list">
+        <li><a href="{% url 'index' %}" class="menu-link">Home</a></li>
+        <li><a href="{% url 'create' %}" class="menu-link">Create Bid</a></li>
+        <li>
+          <a href="{% url 'index' %}" class="menu-link">Active Listing</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+      <ul class="category-list">
+        {% for category in categories %}
+        <li>
+          <div class="category-box">
+            <a href="/category/{{ category }}" class="category-link"
+              >{{ category }}</a
+            >
+          </div>
+        </li>
+        <hr />
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

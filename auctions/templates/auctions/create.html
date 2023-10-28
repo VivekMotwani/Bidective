@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('path_to_your_background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header styles */
+        header {
+            background-color: #007bff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+        }
+
+        /* Navigation menu styles */
+        nav {
+            text-align: center;
+            background-color: #333;
+            padding: 10px 0;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-list li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .menu-link:hover {
+            color: #ff5722; /* Change the color on hover */
+        }
+
+        /* Category list styles */
+        .category-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category-list li {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .category-box {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .category-link:hover {
+            color: #ff5722; /* Change the color on hover */
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <h1>Create New Listing</h1>
+    </header>
+    <nav>
+        <ul class="menu-list">
+            <li><a href="{% url 'index' %}" class="menu-link">Home</a></li>
+            <li><a href="{% url 'categories' %}" class="menu-link">Categories</a></li>
+            <li>
+              <a href="{% url 'index' %}" class="menu-link">Active Listing</a>
+            </li>
+          </ul>
+    </nav>
+    <div class="container">
+        <form method="post" class="form-container">
+            {% csrf_token %}
+            <h2>Create New Listing</h2>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input autofocus class="form-control" type="text" id="title" name="title" placeholder="Enter a title" required>
+            </div>
+            <div class="form-group">
+                <label for="starting_bid">Starting Bid</label>
+                <input class="form-control" type="number" id="starting_bid" name="starting_bid" placeholder="Enter starting bid" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Description</label>
+                <textarea class="form-control" id="content" name="content" rows="8" placeholder="Enter a description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Image Link</label>
+                <input class="form-control" type="url" id="image" name="image" placeholder="Enter an image link" required>
+            </div>            
+            <div class="form-group">
+                <label for="category">Category (Optional)</label>
+                <input class="form-control" type="text" id="category" name="category" placeholder="Enter a category (optional)">
+            </div>
+            <p class="form-error">{{ error }}</p>
+            <button class="btn btn-primary" type="submit">Create</button>
+        </form>
+    </div>
+</body>
+</html>

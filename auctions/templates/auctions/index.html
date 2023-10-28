@@ -1,0 +1,105 @@
+{% extends "auctions/layout.html" %}
+
+{% block styles %}
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header styles */
+        h2 {
+            margin-bottom: 35px;
+            font-size: 24px;
+            color: #007bff;
+        }
+
+        /* Listing styles */
+        .listing-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .listing-image {
+            float: left;
+            margin-right: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .listing-details {
+            padding: 10px 0;
+        }
+
+        .listing-title {
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .listing-title:hover {
+            color: #007bff;
+        }
+
+        .listing-category, .listing-price {
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <h2>
+            {% if check == True %}
+                Active Listings:
+            {% elif check == False %}
+                Closed Listings:
+            {% else %}
+                Listings:
+            {% endif %}
+        </h2>
+
+        <div class="row">
+            {% if listings %}
+                {% for listing in listings %}
+                    <div class="col-md-4 mb-4">
+                        <div class="listing-container">
+                            <img src="{{listing.image}}" alt="Listing Image" class="listing-image img-fluid">
+                            <div class="listing-details">
+                                <a href="/view/{{listing.pk}}" class="listing-title">Title: <strong>{{listing.title}}</strong></a>
+                                <p class="listing-category">Category: <strong>{{listing.category}}</strong></p>
+                                <p class="listing-price">Price: <strong>${{listing.current_bid}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12">
+                    No listings are available.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Include Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+{% endblock %}
